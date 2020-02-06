@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
 
 import '../css/treeherder-global.css';
 import '../css/treeherder-userguide.css';

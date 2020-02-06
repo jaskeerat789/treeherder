@@ -2,10 +2,7 @@ import React from 'react';
 import { render } from 'react-dom';
 
 // Vendor Styles
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-// Vendor JS
-import 'bootstrap';
+import 'bootstrap-css-only/css/bootstrap.min.css';
 
 // Treeherder Styles
 import '../css/treeherder.css';
