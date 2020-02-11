@@ -49,62 +49,54 @@ export default function ReposMenu(props) {
   }));
 
   return (
-    <span>
-      <UncontrolledDropdown>
-        <DropdownToggle
-          id="repoLabel"
-          className="btn-view-nav nav-menu-btn"
-          nav
-          caret
+    <UncontrolledDropdown>
+      <DropdownToggle
+        id="repoLabel"
+        className="btn-view-nav nav-menu-btn"
+        nav
+        caret
+        title="Watch a repo"
+      >
+        Repos
+      </DropdownToggle>
+      <DropdownMenu right id="repo-dropdown">
+        <ul
+          className="checkbox-dropdown-menu row"
+          role="menu"
+          aria-labelledby="repoLabel"
+          aria-haspopup="true"
+          aria-expanded="false"
         >
-          {/* <button
-          type="button"
-          title="Watch a repo"
-          data-toggle="dropdown"
-          className="btn btn-view-nav nav-menu-btn dropdown-toggle"
-        > */}
-          Repos
-        </DropdownToggle>
-        <DropdownMenu
-          right
-          id="repo-dropdown"
-          // className="dropdown-menu nav-dropdown-menu-right container"
-        >
-          <ul
-            className="row"
-            role="menu"
-            aria-labelledby="repoLabel"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
-            {groupedRepos.map(group => (
-              <span className="dropdown-item col" key={group.name}>
-                <li
-                  role="presentation"
-                  className="dropdown-header"
-                  title={group.name}
-                >
-                  {group.name}{' '}
-                  <FontAwesomeIcon icon={faInfoCircle} title={group.name} />
-                </li>
-                {!!group.repos &&
-                  group.repos.map(repo => (
-                    <li key={repo.name}>
-                      <a
-                        title="Open repo"
-                        className="dropdown-link"
-                        href={getRepoUrl(repo.name)}
-                      >
-                        {repo.name}
-                      </a>
-                    </li>
-                  ))}
-              </span>
-            ))}
-          </ul>
-        </DropdownMenu>
-      </UncontrolledDropdown>
-    </span>
+          {groupedRepos.map(group => (
+            <DropdownItem
+              className="repogroup dropdown-item col"
+              key={group.name}
+            >
+              <li
+                role="presentation"
+                className="dropdown-header"
+                title={group.name}
+              >
+                {group.name}{' '}
+                <FontAwesomeIcon icon={faInfoCircle} title={group.name} />
+              </li>
+              {!!group.repos &&
+                group.repos.map(repo => (
+                  <li key={repo.name}>
+                    <a
+                      title="Open repo"
+                      className="dropdown-link"
+                      href={getRepoUrl(repo.name)}
+                    >
+                      {repo.name}
+                    </a>
+                  </li>
+                ))}
+            </DropdownItem>
+          ))}
+        </ul>
+      </DropdownMenu>
+    </UncontrolledDropdown>
   );
 }
 

@@ -51,7 +51,7 @@ function FiltersMenu(props) {
         </button>
         <ul
           id="filter-dropdown"
-          className="dropdown-menu nav-dropdown-menu-right pl-0"
+          className="dropdown-menu nav-dropdown-menu-right checkbox-dropdown-menu"
           role="menu"
           aria-labelledby="filterLabel"
         >

@@ -444,6 +444,10 @@ fieldset[disabled] .btn-view-nav-closed.active {
   min-width: 21rem;
 }
 
+.checkbox-dropdown-menu .repogroup {
+  padding-left: 0;
+}
+
 .dropdown-item:hover {
   background-color: #d3d3d34d;
 }

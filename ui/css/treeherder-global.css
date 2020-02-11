@@ -89,6 +89,7 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
+/* TODO remove */
 /* For cases where the base Bootstrap 4 equivalent doesn't
    work, due to our special uses.*/
 .nav-dropdown-menu-right {

@@ -62,7 +62,7 @@ export default function LogItem(props) {
             >
               {props.children}
             </span>
-            <ul className="dropdown-menu pl-0" role="menu">
+            <ul className="dropdown-menu checkbox-dropdown-menu" role="menu">
               {logUrls.map(logUrl => {
                 return (
                   <li key={`${logKey}-${logUrl.id}`}>
