@@ -3,18 +3,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Label } from 'reactstrap';
-
-import { thAllResultStatuses } from '../../helpers/constants';
-import { getJobsUrl } from '../../helpers/url';
-import { setSelectedJob, clearSelectedJob } from '../redux/stores/selectedJob';
-import { pinJobs } from '../redux/stores/pinnedJobs';
 import {
+  Label,
   DropdownMenu,
   DropdownItem,
   DropdownToggle,
   UncontrolledDropdown,
 } from 'reactstrap';
+
+import { thAllResultStatuses } from '../../helpers/constants';
+import { getJobsUrl } from '../../helpers/url';
+import { setSelectedJob, clearSelectedJob } from '../redux/stores/selectedJob';
+import { pinJobs } from '../redux/stores/pinnedJobs';
 
 const resultStatusMenuItems = thAllResultStatuses.filter(
   rs => rs !== 'runnable',
@@ -44,83 +44,80 @@ function FiltersMenu(props) {
   const { email } = user;
 
   return (
-      <UncontrolledDropdown>
-        <DropdownToggle
-          title="Set filters"
-          className="btn-view-nav nav-menu-btn"
-          nav caret
+    <UncontrolledDropdown>
+      <DropdownToggle
+        title="Set filters"
+        className="btn-view-nav nav-menu-btn"
+        nav
+        caret
+      >
+        Filters
+      </DropdownToggle>
+      <DropdownMenu>
+        {resultStatusMenuItems.map(filterName => (
+          <DropdownItem key={filterName} tag="a">
+            <Label className="dropdown-item pl-0">
+              <input
+                type="checkbox"
+                className="mousetrap"
+                id={filterName}
+                checked={resultStatus.includes(filterName)}
+                onChange={() => filterModel.toggleResultStatuses([filterName])}
+              />
+              {filterName}
+            </Label>
+          </DropdownItem>
+        ))}
+        <div className="dropdown-divider separator" />
+        <DropdownItem tag="a">
+        <Label className="dropdown-item">
+          <input
+            type="checkbox"
+            id="classified"
+            checked={classifiedState.includes('classified')}
+            onChange={() => filterModel.toggleClassifiedFilter('classified')}
+          />
+          classified
+        </Label>
+        </DropdownItem>
+        <DropdownItem tag="a">
+        <Label className="dropdown-item">
+          <input
+            type="checkbox"
+            id="unclassified"
+            checked={classifiedState.includes('unclassified')}
+            onChange={() => filterModel.toggleClassifiedFilter('unclassified')}
+          />
+          unclassified
+        </Label>
+        </DropdownItem>
+        <li className="dropdown-divider separator" />
+        <li
+          title="Pin all jobs that pass the global filters"
+          className="dropdown-item"
+          onClick={pinAllShownJobs}
         >
-          Filters
-        </DropdownToggle>
-        <DropdownMenu>
-          <li>
-            {resultStatusMenuItems.map(filterName => (
-              <span key={filterName}>
-                <span>
-                  <Label className="dropdown-item">
-                    <input
-                      type="checkbox"
-                      className="mousetrap"
-                      id={filterName}
-                      checked={resultStatus.includes(filterName)}
-                      onChange={() =>
-                        filterModel.toggleResultStatuses([filterName])
-                      }
-                    />
-                    {filterName}
-                  </Label>
-                </span>
-              </span>
-            ))}
-          </li>
-          <li className="dropdown-divider separator" />
-          <Label className="dropdown-item">
-            <input
-              type="checkbox"
-              id="classified"
-              checked={classifiedState.includes('classified')}
-              onChange={() => filterModel.toggleClassifiedFilter('classified')}
-            />
-            classified
-          </Label>
-          <Label className="dropdown-item">
-            <input
-              type="checkbox"
-              id="unclassified"
-              checked={classifiedState.includes('unclassified')}
-              onChange={() =>
-                filterModel.toggleClassifiedFilter('unclassified')
-              }
-            />
-            unclassified
-          </Label>
-          <li className="dropdown-divider separator" />
-          <li
-            title="Pin all jobs that pass the global filters"
-            className="dropdown-item"
-            onClick={pinAllShownJobs}
-          >
-            Pin all showing
-          </li>
-          <li
-            title="Show only superseded jobs"
-            className="dropdown-item"
-            onClick={filterModel.setOnlySuperseded}
-          >
-            Superseded only
-          </li>
-          <li title={`Show only pushes for ${email}`} className="dropdown-item">
-            <a href={getJobsUrl({ author: email })}>My pushes only</a>
-          </li>
-          <li
-            title="Reset to default status filters"
-            className="dropdown-item"
-            onClick={filterModel.resetNonFieldFilters}
-          >
-            Reset
-          </li>
-        </DropdownMenu>
-      </UncontrolledDropdown>
+          Pin all showing
+        </li>
+        <li
+          title="Show only superseded jobs"
+          className="dropdown-item"
+          onClick={filterModel.setOnlySuperseded}
+        >
+          Superseded only
+        </li>
+        <li title={`Show only pushes for ${email}`} className="dropdown-item">
+          <a href={getJobsUrl({ author: email })}>My pushes only</a>
+        </li>
+        <li
+          title="Reset to default status filters"
+          className="dropdown-item"
+          onClick={filterModel.resetNonFieldFilters}
+        >
+          Reset
+        </li>
+      </DropdownMenu>
+    </UncontrolledDropdown>
   );
 }
 
