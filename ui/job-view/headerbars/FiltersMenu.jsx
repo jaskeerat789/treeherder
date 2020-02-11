@@ -10,6 +10,8 @@ import {
   DropdownToggle,
   UncontrolledDropdown,
 } from 'reactstrap';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { thAllResultStatuses } from '../../helpers/constants';
 import { getJobsUrl } from '../../helpers/url';
@@ -55,41 +57,45 @@ function FiltersMenu(props) {
       </DropdownToggle>
       <DropdownMenu>
         {resultStatusMenuItems.map(filterName => (
-          <DropdownItem key={filterName} tag="a">
-            <Label className="dropdown-item pl-0">
-              <input
-                type="checkbox"
-                className="mousetrap"
-                id={filterName}
-                checked={resultStatus.includes(filterName)}
-                onChange={() => filterModel.toggleResultStatuses([filterName])}
-              />
-              {filterName}
-            </Label>
+          <DropdownItem
+            key={filterName}
+            tag="a"
+            onClick={() => filterModel.toggleResultStatuses([filterName])}
+          >
+            <FontAwesomeIcon
+              icon={faCheck}
+              className={`mr-1 ${
+                resultStatus.includes(filterName) ? '' : 'hide'
+              }`}
+              title={resultStatus.includes(filterName) ? 'Selected' : ''}
+            />
+            {filterName}
           </DropdownItem>
         ))}
         <div className="dropdown-divider separator" />
         <DropdownItem tag="a">
-        <Label className="dropdown-item">
-          <input
-            type="checkbox"
-            id="classified"
-            checked={classifiedState.includes('classified')}
-            onChange={() => filterModel.toggleClassifiedFilter('classified')}
-          />
-          classified
-        </Label>
+          <Label className="dropdown-item">
+            <input
+              type="checkbox"
+              id="classified"
+              checked={classifiedState.includes('classified')}
+              onChange={() => filterModel.toggleClassifiedFilter('classified')}
+            />
+            classified
+          </Label>
         </DropdownItem>
         <DropdownItem tag="a">
-        <Label className="dropdown-item">
-          <input
-            type="checkbox"
-            id="unclassified"
-            checked={classifiedState.includes('unclassified')}
-            onChange={() => filterModel.toggleClassifiedFilter('unclassified')}
-          />
-          unclassified
-        </Label>
+          <Label className="dropdown-item">
+            <input
+              type="checkbox"
+              id="unclassified"
+              checked={classifiedState.includes('unclassified')}
+              onChange={() =>
+                filterModel.toggleClassifiedFilter('unclassified')
+              }
+            />
+            unclassified
+          </Label>
         </DropdownItem>
         <li className="dropdown-divider separator" />
         <li
