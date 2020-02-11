@@ -2,6 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+} from 'reactstrap';
 
 import { getRepoUrl } from '../../helpers/location';
 
@@ -44,29 +50,35 @@ export default function ReposMenu(props) {
 
   return (
     <span>
-      <span className="dropdown">
-        <button
+      <UncontrolledDropdown>
+        <DropdownToggle
           id="repoLabel"
+          className="btn-view-nav nav-menu-btn"
+          nav
+          caret
+        >
+          {/* <button
           type="button"
           title="Watch a repo"
           data-toggle="dropdown"
           className="btn btn-view-nav nav-menu-btn dropdown-toggle"
-        >
+        > */}
           Repos
-        </button>
-        <span
+        </DropdownToggle>
+        <DropdownMenu
+          right
           id="repo-dropdown"
-          className="dropdown-menu nav-dropdown-menu-right container"
+          // className="dropdown-menu nav-dropdown-menu-right container"
         >
           <ul
-            className="checkbox-dropdown-menu row"
+            className="row"
             role="menu"
             aria-labelledby="repoLabel"
             aria-haspopup="true"
             aria-expanded="false"
           >
             {groupedRepos.map(group => (
-              <span className="repogroup dropdown-item col" key={group.name}>
+              <span className="dropdown-item col" key={group.name}>
                 <li
                   role="presentation"
                   className="dropdown-header"
@@ -90,8 +102,8 @@ export default function ReposMenu(props) {
               </span>
             ))}
           </ul>
-        </span>
-      </span>
+        </DropdownMenu>
+      </UncontrolledDropdown>
     </span>
   );
 }
