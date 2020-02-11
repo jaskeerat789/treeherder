@@ -9,6 +9,12 @@ import { thAllResultStatuses } from '../../helpers/constants';
 import { getJobsUrl } from '../../helpers/url';
 import { setSelectedJob, clearSelectedJob } from '../redux/stores/selectedJob';
 import { pinJobs } from '../redux/stores/pinnedJobs';
+import {
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+} from 'reactstrap';
 
 const resultStatusMenuItems = thAllResultStatuses.filter(
   rs => rs !== 'runnable',
@@ -38,23 +44,15 @@ function FiltersMenu(props) {
   const { email } = user;
 
   return (
-    <span>
-      <span className="dropdown">
-        <button
-          id="filterLabel"
-          type="button"
+      <UncontrolledDropdown>
+        <DropdownToggle
           title="Set filters"
-          data-toggle="dropdown"
-          className="btn btn-view-nav nav-menu-btn dropdown-toggle"
+          className="btn-view-nav nav-menu-btn"
+          nav caret
         >
           Filters
-        </button>
-        <ul
-          id="filter-dropdown"
-          className="dropdown-menu nav-dropdown-menu-right checkbox-dropdown-menu"
-          role="menu"
-          aria-labelledby="filterLabel"
-        >
+        </DropdownToggle>
+        <DropdownMenu>
           <li>
             {resultStatusMenuItems.map(filterName => (
               <span key={filterName}>
@@ -121,9 +119,8 @@ function FiltersMenu(props) {
           >
             Reset
           </li>
-        </ul>
-      </span>
-    </span>
+        </DropdownMenu>
+      </UncontrolledDropdown>
   );
 }
 
