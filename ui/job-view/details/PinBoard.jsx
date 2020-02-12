@@ -608,45 +608,32 @@ class PinBoard extends React.Component {
                   }
                   outline
                 />
-                <ul className="dropdown-menu save-btn-dropdown-menu">
-                  <li
+                <DropdownMenu className="save-btn-dropdown-menu">
+                  <DropdownItem
+                    tag="a"
                     title={
                       !isLoggedIn ? 'Not logged in' : 'Repeat the pinned jobs'
                     }
+                    className={!isLoggedIn ? 'disabled' : ''}
+                    onClick={() => !isLoggedIn || this.retriggerAllPinnedJobs()}
                   >
-                    <Button
-                      className={`${
-                        !isLoggedIn ? 'disabled' : ''
-                      } dropdown-item`}
-                      onClick={() =>
-                        !isLoggedIn || this.retriggerAllPinnedJobs()
-                      }
-                    >
-                      Retrigger all
-                    </Button>
-                  </li>
-                  <li title={this.cancelAllPinnedJobsTitle()}>
-                    <Button
-                      className={`${
-                        this.canCancelAllPinnedJobs() ? '' : 'disabled'
-                      } dropdown-item`}
-                      onClick={() =>
-                        this.canCancelAllPinnedJobs() &&
-                        this.cancelAllPinnedJobs()
-                      }
-                    >
-                      Cancel all
-                    </Button>
-                  </li>
-                  <li>
-                    <Button
-                      className="dropdown-item"
-                      onClick={() => this.unPinAll()}
-                    >
-                      Clear all
-                    </Button>
-                  </li>
-                </ul>
+                    Retrigger all
+                  </DropdownItem>
+                  <DropdownItem
+                    tag="a"
+                    title={this.cancelAllPinnedJobsTitle()}
+                    className={this.canCancelAllPinnedJobs() ? '' : 'disabled'}
+                    onClick={() =>
+                      this.canCancelAllPinnedJobs() &&
+                      this.cancelAllPinnedJobs()
+                    }
+                  >
+                    Cancel all
+                  </DropdownItem>
+                  <DropdownItem tag="a" onClick={() => this.unPinAll()}>
+                    Clear all
+                  </DropdownItem>
+                </DropdownMenu>
               </UncontrolledDropdown>
             </ButtonGroup>
           </div>
