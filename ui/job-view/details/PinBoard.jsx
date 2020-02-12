@@ -3,7 +3,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, FormGroup, Input, FormFeedback } from 'reactstrap';
+import {
+  Button,
+  ButtonGroup,
+  FormGroup,
+  Input,
+  FormFeedback,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+} from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faTimes } from '@fortawesome/free-solid-svg-icons';
 
@@ -568,71 +578,77 @@ class PinBoard extends React.Component {
             className="btn-group-vertical"
             title={this.hasPinnedJobs() ? '' : 'No pinned jobs'}
           >
-            <div className="btn-group save-btn-group dropdown">
+            <ButtonGroup className="save-btn-group">
               <Button
-                className={`btn btn-light-bordered btn-xs save-btn ${
+                className={`btn-light-bordered save-btn ${
                   !isLoggedIn || !this.canSaveClassifications()
                     ? 'disabled'
                     : ''
                 }`}
                 outline
+                size="xs"
                 title={this.saveUITitle('classification')}
                 onClick={this.save}
               >
                 save
               </Button>
-              <Button
-                className={`btn btn-light-bordered btn-xs dropdown-toggle save-btn-dropdown ${
-                  !this.hasPinnedJobs() && !this.pinboardIsDirty()
-                    ? 'disabled'
-                    : ''
-                }`}
-                title={
-                  !this.hasPinnedJobs() && !this.pinboardIsDirty()
-                    ? 'No pinned jobs'
-                    : 'Additional pinboard functions'
-                }
-                outline
-                data-toggle="dropdown"
-              >
-                <span className="caret" />
-              </Button>
-              <ul className="dropdown-menu save-btn-dropdown-menu">
-                <li
+              <UncontrolledDropdown>
+                <DropdownToggle
+                  size="xs"
+                  caret
+                  className={`btn-light-bordered ${
+                    !this.hasPinnedJobs() && !this.pinboardIsDirty()
+                      ? 'disabled'
+                      : ''
+                  }`}
                   title={
-                    !isLoggedIn ? 'Not logged in' : 'Repeat the pinned jobs'
+                    !this.hasPinnedJobs() && !this.pinboardIsDirty()
+                      ? 'No pinned jobs'
+                      : 'Additional pinboard functions'
                   }
-                >
-                  <Button
-                    className={`${!isLoggedIn ? 'disabled' : ''} dropdown-item`}
-                    onClick={() => !isLoggedIn || this.retriggerAllPinnedJobs()}
-                  >
-                    Retrigger all
-                  </Button>
-                </li>
-                <li title={this.cancelAllPinnedJobsTitle()}>
-                  <Button
-                    className={`${
-                      this.canCancelAllPinnedJobs() ? '' : 'disabled'
-                    } dropdown-item`}
-                    onClick={() =>
-                      this.canCancelAllPinnedJobs() &&
-                      this.cancelAllPinnedJobs()
+                  outline
+                />
+                <ul className="dropdown-menu save-btn-dropdown-menu">
+                  <li
+                    title={
+                      !isLoggedIn ? 'Not logged in' : 'Repeat the pinned jobs'
                     }
                   >
-                    Cancel all
-                  </Button>
-                </li>
-                <li>
-                  <Button
-                    className="dropdown-item"
-                    onClick={() => this.unPinAll()}
-                  >
-                    Clear all
-                  </Button>
-                </li>
-              </ul>
-            </div>
+                    <Button
+                      className={`${
+                        !isLoggedIn ? 'disabled' : ''
+                      } dropdown-item`}
+                      onClick={() =>
+                        !isLoggedIn || this.retriggerAllPinnedJobs()
+                      }
+                    >
+                      Retrigger all
+                    </Button>
+                  </li>
+                  <li title={this.cancelAllPinnedJobsTitle()}>
+                    <Button
+                      className={`${
+                        this.canCancelAllPinnedJobs() ? '' : 'disabled'
+                      } dropdown-item`}
+                      onClick={() =>
+                        this.canCancelAllPinnedJobs() &&
+                        this.cancelAllPinnedJobs()
+                      }
+                    >
+                      Cancel all
+                    </Button>
+                  </li>
+                  <li>
+                    <Button
+                      className="dropdown-item"
+                      onClick={() => this.unPinAll()}
+                    >
+                      Clear all
+                    </Button>
+                  </li>
+                </ul>
+              </UncontrolledDropdown>
+            </ButtonGroup>
           </div>
         </div>
       </div>

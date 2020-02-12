@@ -448,7 +448,7 @@ class ActionBar extends React.PureComponent {
               <Button
                 id="pin-job-btn"
                 title="Add this job to the pinboard"
-                className="actionbar-nav-btn btn icon-blue bg-transparent border-0"
+                className="actionbar-nav-btn icon-blue bg-transparent border-0"
                 onClick={() => pinJob(selectedJobFull)}
               >
                 <FontAwesomeIcon icon={faThumbtack} title="Pin job" />
@@ -462,7 +462,7 @@ class ActionBar extends React.PureComponent {
                     ? 'Repeat the selected job'
                     : 'Must be logged in to retrigger a job'
                 }
-                className={`actionbar-nav-btn btn bg-transparent border-0 ${
+                className={`actionbar-nav-btn bg-transparent border-0 ${
                   user.isLoggedIn ? 'icon-green' : 'disabled'
                 }`}
                 disabled={!user.isLoggedIn}
@@ -492,7 +492,7 @@ class ActionBar extends React.PureComponent {
               <Button
                 id="find-job-btn"
                 title="Scroll to selection"
-                className="actionbar-nav-btn btn icon-blue bg-transparent border-0"
+                className="actionbar-nav-btn icon-blue bg-transparent border-0"
                 onClick={() =>
                   findJobInstance(jobLogUrls[0] && jobLogUrls[0].job_id, true)
                 }
