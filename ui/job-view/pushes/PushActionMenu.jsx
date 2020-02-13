@@ -3,6 +3,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {
+  ButtonGroup,
+  Button,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+} from 'reactstrap';
 
 import { getUrlParam } from '../../helpers/location';
 import { formatTaskclusterError } from '../../helpers/errorMessage';
@@ -150,20 +158,14 @@ class PushActionMenu extends React.PureComponent {
     } = this.state;
 
     return (
-      <span className="btn-group dropdown" dropdown="true">
-        <button
-          dropdown-toggle="true"
-          className="btn btn-sm btn-push dropdown-toggle"
-          type="button"
+      <UncontrolledDropdown className="btn-group">
+        <DropdownToggle
+          size="sm"
+          className="bg-transparent border-0 text-secondary"
           title="Action menu"
-          data-hover="dropdown"
-          data-toggle="dropdown"
-          data-delay="1000"
           data-testid="push-action-menu-button"
-        >
-          <span className="caret" />
-        </button>
-
+          caret
+        />
         <ul className="dropdown-menu pull-right">
           {runnableVisible ? (
             <li
@@ -283,7 +285,7 @@ class PushActionMenu extends React.PureComponent {
             toggle={this.toggleCustomJobActions}
           />
         )}
-      </span>
+      </UncontrolledDropdown>
     );
   }
 }

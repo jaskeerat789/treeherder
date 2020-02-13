@@ -96,7 +96,9 @@ class NotificationsMenu extends React.Component {
               </DropdownItem>
             ))
           ) : (
-            <DropdownItem tag="a" className="pl-0">No recent notifications</DropdownItem>
+            <DropdownItem tag="a" className="pl-0">
+              No recent notifications
+            </DropdownItem>
           )}
         </DropdownMenu>
       </UncontrolledDropdown>
