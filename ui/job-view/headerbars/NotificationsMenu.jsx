@@ -9,6 +9,13 @@ import {
   faExclamationTriangle,
   faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  Button,
+  DropdownMenu,
+  DropdownItem,
+  DropdownToggle,
+  UncontrolledDropdown,
+} from 'reactstrap';
 
 import { shortDateFormat } from '../../helpers/display';
 import { clearStoredNotifications } from '../redux/stores/notifications';
@@ -32,44 +39,29 @@ class NotificationsMenu extends React.Component {
     const { storedNotifications, clearStoredNotifications } = this.props;
 
     return (
-      <span className="dropdown">
-        <button
-          id="notificationLabel"
-          type="button"
-          title="Recent notifications"
-          aria-label="Recent notifications"
-          data-toggle="dropdown"
-          className="btn btn-view-nav nav-menu-btn"
-        >
+      <UncontrolledDropdown>
+        <DropdownToggle className="btn-view-nav nav-menu-btn">
           <FontAwesomeIcon
             icon={faBell}
             className="lightgray"
             title="Recent notifications"
           />
-        </button>
-        <ul
-          id="notification-dropdown"
-          className="dropdown-menu nav-dropdown-menu-right"
-          role="menu"
-          aria-labelledby="notificationLabel"
-        >
-          <li
-            role="presentation"
-            className="dropdown-header"
-            title="Notifications"
-          >
+        </DropdownToggle>
+        <DropdownMenu id="notification-dropdown" right>
+          <DropdownItem tag="a" title="Notifications" className="pl-0" header>
             Recent notifications
             {!!storedNotifications.length && (
-              <button
-                type="button"
-                className="btn btn-xs btn-light-bordered notification-dropdown-btn"
+              <Button
+                size="xs"
+                outline
+                className="notification-dropdown-btn"
                 title="Clear all notifications"
                 onClick={clearStoredNotifications}
               >
                 Clear all
-              </button>
+              </Button>
             )}
-          </li>
+          </DropdownItem>
           {storedNotifications.length ? (
             storedNotifications.map(notification => (
               <li
@@ -107,8 +99,8 @@ class NotificationsMenu extends React.Component {
               <span>No recent notifications</span>
             </li>
           )}
-        </ul>
-      </span>
+        </DropdownMenu>
+      </UncontrolledDropdown>
     );
   }
 }
