@@ -64,8 +64,9 @@ class NotificationsMenu extends React.Component {
           </DropdownItem>
           {storedNotifications.length ? (
             storedNotifications.map(notification => (
-              <li
-                className="notification-dropdown-line"
+              <DropdownItem
+                tag="a"
+                className="pl-0 notification-dropdown-line"
                 key={`${notification.created}${notification.message}`}
               >
                 <span
@@ -92,12 +93,10 @@ class NotificationsMenu extends React.Component {
                     {notification.linkText}
                   </a>
                 </span>
-              </li>
+              </DropdownItem>
             ))
           ) : (
-            <li>
-              <span>No recent notifications</span>
-            </li>
+            <DropdownItem tag="a" className="pl-0">No recent notifications</DropdownItem>
           )}
         </DropdownMenu>
       </UncontrolledDropdown>

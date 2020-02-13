@@ -395,7 +395,7 @@ fieldset[disabled] .btn-view-nav-closed.active {
 }
 
 #notification-dropdown {
-  min-width: 25em;
+  max-width: 25em;
   max-height: 20em;
   overflow-y: scroll;
   padding-left: 20px;
@@ -408,8 +408,6 @@ fieldset[disabled] .btn-view-nav-closed.active {
 }
 
 .notification-dropdown-line {
-  padding-top: 3px;
-  padding-bottom: 3px;
   overflow-x: hidden;
   text-overflow: ellipsis;
 }
